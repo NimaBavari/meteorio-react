@@ -7,7 +7,7 @@ export default class WeatherCard extends Component {
 
   render() {
     const { location, current } = this.props.results;
-    if (!location && !current) return null;
+    if (!location || !current) return null;
     return (
       <div className="card weather-card">
         <div className="card-body">
