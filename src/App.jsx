@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import {
+  ErrorTextShownContext,
+  LoadingImageContext,
+  SearchResultsContext
+} from './Store.jsx'
 
 import ErrorCard from './components/ErrorCard';
 import Form from './components/Form';
@@ -7,11 +13,11 @@ import Navbar from './components/Navbar';
 import SearchAgain from './components/SearchAgain';
 import WeatherCard from './components/WeatherCard';
 
-const errorTextShown = '';
-const loadingImage = false;
-const searchResults = {};
-
 const App = () => {
+  const [errorTextShown, setErrorTextShown] = useContext(ErrorTextShownContext);
+  const [loadingImage, setLoadingImage] = useContext(LoadingImageContext);
+  const [searchResults, setSearchResults] = useContext(SearchResultsContext);
+
   return (
     <div className="App">
       <Navbar />

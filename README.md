@@ -10,6 +10,4 @@ A simple weather app with React.js: this is a React.js remake of my earlier vani
 
 The following issues need to be addressed and resolved:
 
-* [ ] Potentially incorrect conditional order of components in `src/App.jsx`
-* [ ] Potential bug in fetch promise chain in `src/components/Form.jsx` (delayed response)
-* [ ] Need to convert to global states
+* [ ] Why is `ErrorCard` not shown?

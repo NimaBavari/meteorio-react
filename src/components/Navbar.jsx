@@ -4,7 +4,7 @@ const Navbar = () => (
   <nav className="navbar navbar-expand-lg navbar-dark">
     <div className="container">
       <a className="navbar-brand" href="/">
-        <img src={window.location.origin + "/img/logo.png"} alt="METEORIO" className="logo" />
+        <img className="logo" src={window.location.origin + "/img/logo.png"} alt="METEORIO" />
       </a>
     </div>
   </nav>

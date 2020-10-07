@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useContext } from 'react';
+
+import {
+  ErrorTextShownContext,
+  LoadingImageContext,
+  SearchInputValueContext,
+  SearchResultsContext
+} from '../Store.jsx';
 
 const BASE_URL = 'http://api.weatherstack.com/current?access_key=78b6376e9b1eaf841e6a89f6d1ac5021&query=';
 
 const Form = () => {
-  const [searchInputValue, setSearchInputValue] = useState('');
-  const [loadingImage, setLoadingImage] = useState(false);
-  const [errorTextShown, setErrorTextShown] = useState(false);
-  const [searchResults, setSearchResults] = useState({});
+  const [errorTextShown, setErrorTextShown] = useContext(ErrorTextShownContext);
+  const [loadingImage, setLoadingImage] = useContext(LoadingImageContext);
+  const [searchInputValue, setSearchInputValue] = useContext(SearchInputValueContext);
+  const [searchResults, setSearchResults] = useContext(SearchResultsContext);
 
-  const searchCity = (evt) => {
+  const searchCity = useCallback((evt) => {
     evt.preventDefault();
     setLoadingImage(true);
     fetch(`${BASE_URL}${searchInputValue}`)
@@ -23,11 +30,11 @@ const Form = () => {
       .then(() => {
         setLoadingImage(false);
       });
-  }
+  }, [searchInputValue, searchResults, errorTextShown, loadingImage]);
 
-  const handleChange = (evt) => {
+  const handleChange = useCallback((evt) => {
     setSearchInputValue(evt.target.value);
-  }
+  }, [searchInputValue]);
 
   return (
     <form
