@@ -1,71 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export const state = {
-  searchInputValue: '',
-  searchBtnDisabled: true,
-  searhAgainBtnShown: false,
-  loadingImage: false,
-  errorTextShown: false,
-  searchResults: {},
-};
 const BASE_URL = 'http://api.weatherstack.com/current?access_key=78b6376e9b1eaf841e6a89f6d1ac5021&query=';
 
 const Form = () => {
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [errorTextShown, setErrorTextShown] = useState(false);
+  const [searchResults, setSearchResults] = useState({});
+
   const searchCity = (evt) => {
     evt.preventDefault();
-    this.setState({ loadingImage: true });
-    fetch(`${BASE_URL}${state.searchInputValue}`)
+    setLoadingImage(true);
+    fetch(`${BASE_URL}${searchInputValue}`)
       .then(response => response.json())
       .then(results => {
-        this.setState({
-          loadingImage: false,
-          searchInputValue: '',
-          searchResults: results,
-        });
+        setLoadingImage(false);
+        setSearchInputValue('');
+        setSearchResults(results);
       })
       .catch((err) => {
-        this.setState({
-          errorTextShown: true,
-          loadingImage: false,
-        });
-      })
-      .then(() => {
-        this.setState({ searchAgainBtnShown: true });
+        setErrorTextShown(true);
+        setLoadingImage(false);
       })
   }
 
   const handleChange = (evt) => {
-    this.setState({ searchInputValue: evt.target.value });
-  }
-
-  const handleKeyUp = () => {
-    this.setState({ searchBtnDisabled: !state.searchInputValue });
+    setSearchInputValue(evt.target.value);
   }
 
   return (
     <form
       className="form-inline justify-content-center"
       id="search-city-form"
-      onSubmit={event => {
-        searchCity(event);
-      }}
+      onSubmit={searchCity}
     >
       <div className="form-group">
         <input
           type="text"
           id="search-city-input"
-          value={state.searchInputValue}
+          value={searchInputValue}
           className="form-control form-control-lg"
           placeholder="Search Cities..."
           onChange={handleChange}
-          onKeyUp={handleKeyUp}
           autoFocus
         />
       </div>
       <button
         type="submit"
         className="btn btn-primary btn-lg"
-        disabled={state.searchBtnDisabled}
+        disabled={!searchInputValue}
       >
         <i className="fas fa-search-location"></i> Search
       </button>
