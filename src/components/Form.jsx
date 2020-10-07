@@ -14,14 +14,15 @@ const Form = () => {
     fetch(`${BASE_URL}${searchInputValue}`)
       .then(response => response.json())
       .then(results => {
-        setLoadingImage(false);
         setSearchInputValue('');
         setSearchResults(results);
       })
       .catch((err) => {
         setErrorTextShown(true);
-        setLoadingImage(false);
       })
+      .then(() => {
+        setLoadingImage(false);
+      });
   }
 
   const handleChange = (evt) => {
