@@ -1,14 +1,20 @@
 import React from 'react';
 
-import Ancestor from './Ancestor';
-
+export const state = {
+  searchInputValue: '',
+  searchBtnDisabled: true,
+  searhAgainBtnShown: false,
+  loadingImage: false,
+  errorTextShown: false,
+  searchResults: {},
+};
 const BASE_URL = 'http://api.weatherstack.com/current?access_key=78b6376e9b1eaf841e6a89f6d1ac5021&query=';
 
-export default class Form extends Ancestor {
-  searchCity(evt) {
+const Form = () => {
+  const searchCity = (evt) => {
     evt.preventDefault();
     this.setState({ loadingImage: true });
-    fetch(`${BASE_URL}${this.state.searchInputValue}`)
+    fetch(`${BASE_URL}${state.searchInputValue}`)
       .then(response => response.json())
       .then(results => {
         this.setState({
@@ -28,43 +34,43 @@ export default class Form extends Ancestor {
       })
   }
 
-  handleChange(evt) {
+  const handleChange = (evt) => {
     this.setState({ searchInputValue: evt.target.value });
   }
 
-  handleKeyUp() {
-    this.setState({ searchBtnDisabled: !this.state.searchInputValue });
+  const handleKeyUp = () => {
+    this.setState({ searchBtnDisabled: !state.searchInputValue });
   }
 
-  render() {
-    return (
-      <form
-        className="form-inline justify-content-center"
-        id="search-city-form"
-        onSubmit={event => {
-          this.searchCity(event);
-        }}
+  return (
+    <form
+      className="form-inline justify-content-center"
+      id="search-city-form"
+      onSubmit={event => {
+        searchCity(event);
+      }}
+    >
+      <div className="form-group">
+        <input
+          type="text"
+          id="search-city-input"
+          value={state.searchInputValue}
+          className="form-control form-control-lg"
+          placeholder="Search Cities..."
+          onChange={handleChange}
+          onKeyUp={handleKeyUp}
+          autoFocus
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary btn-lg"
+        disabled={state.searchBtnDisabled}
       >
-        <div className="form-group">
-          <input
-            type="text"
-            id="search-city-input"
-            value={this.state.searchInputValue}
-            className="form-control form-control-lg"
-            placeholder="Search Cities..."
-            onChange={(event) => { this.handleChange(event); }}
-            onKeyUp={() => { this.handleKeyUp(); }}
-            autoFocus
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary btn-lg"
-          disabled={this.state.searchBtnDisabled}
-        >
-          <i className="fas fa-search-location"></i> Search
-        </button>
-      </form>
-    );
-  }
+        <i className="fas fa-search-location"></i> Search
+      </button>
+    </form>
+  );
 }
+
+export default Form;

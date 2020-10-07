@@ -1,33 +1,30 @@
 import React from 'react';
 
-import Ancestor from './components/Ancestor';
 import ErrorCard from './components/ErrorCard';
-import Form from './components/Form';
+import Form, { state } from './components/Form';
 import Loading from './components/Loading';
 import Navbar from './components/Navbar';
 import SearchAgain from './components/SearchAgain';
 import WeatherCard from './components/WeatherCard';
 
-class App extends Ancestor {
-  render() {
-    return (
-      <div className="App">
-        <Navbar />
-        <section role="main">
-          <div className="container">
-            <div className="main-search">
-              {!this.state.searhAgainBtnShown ? <Form /> : ''}
-            </div>
-            <div className="d-flex justify-content-center my-5" id="weather">
-              {this.state.loadingImage ? <Loading /> :
-                this.state.errorTextShown ? <ErrorCard /> : <WeatherCard results={this.state.searchResults} />}
-            </div>
-            {this.state.searchAgainBtnShown ? <SearchAgain /> : ''}
+const App = () => {
+  return (
+    <div className="App">
+      <Navbar />
+      <section role="main">
+        <div className="container">
+          <div className="main-search">
+            {!state.searhAgainBtnShown ? <Form /> : ''}
           </div>
-        </section>
-      </div>
-    );
-  }
+          <div className="d-flex justify-content-center my-5" id="weather">
+            {state.loadingImage ? <Loading /> :
+              state.errorTextShown ? <ErrorCard /> : <WeatherCard results={state.searchResults} />}
+          </div>
+          {state.searchAgainBtnShown ? <SearchAgain /> : ''}
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default App;

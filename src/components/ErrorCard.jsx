@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ErrorCard extends Component {
-  render() {
-    return (
-      <div className="text-danger">
-        The city you entered not found. Search again, please.
-      </div>
-    );
-  }
-}
+const ErrorCard = () => (
+  <div className="text-danger">
+    The city you entered not found. Search again, please.
+  </div>
+);
+
+export default ErrorCard;

@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Loading extends Component {
-  render() {
-    return (
-      <img className="loading" src="./img/loading.jpg" alt="Loading..." />
-    );
-  }
-}
+const Loading = () => (
+  <img className="loading" src="./img/loading.jpg" alt="Loading..." />
+);
+
+export default Loading;
