@@ -31,11 +31,17 @@ const Form = () => {
       .then(() => {
         setLoadingImage(false);
       });
-  }, [searchInputValue, searchResults, errorTextShown, loadingImage]);
+  }, [
+    searchInputValue,
+    setErrorTextShown,
+    setLoadingImage,
+    setSearchInputValue,
+    setSearchResults,
+  ]);
 
   const handleChange = useCallback((evt) => {
     setSearchInputValue(evt.target.value);
-  }, [searchInputValue]);
+  }, [setSearchInputValue]);
 
   return (
     <form
