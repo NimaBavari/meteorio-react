@@ -5,9 +5,3 @@ A simple weather app with React.js: this is a React.js remake of my earlier vani
 **Time spent: 5 work hours.**
 
 **Note:** This app has been made to strengthen my React.js prowess.
-
-## ISSUES
-
-The following issues need to be addressed and resolved:
-
-* [ ] Why is `ErrorCard` not shown?
