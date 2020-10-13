@@ -21,10 +21,7 @@ const Form = () => {
     fetch(`${BASE_URL}${searchInputValue}`)
       .then(response => response.json())
       .then(results => {
-        console.log(results)
-        if(results.error) {
-          throw results.error.info;
-        }
+        if (results.error) throw results.error.info;
         setSearchInputValue('');
         setSearchResults(results);
       })
